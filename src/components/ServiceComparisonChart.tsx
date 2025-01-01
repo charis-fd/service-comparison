@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const ServiceComparisonChart = () => {
+const ServiceComparisonChart: React.FC = () => {
   const preService = {
     period: 'Pre-Service (Oct)',
     consumption: 2.59,
@@ -22,6 +22,8 @@ const ServiceComparisonChart = () => {
     efficiency: (2013 / 2.75).toFixed(0)
   };
 
+  const data = [preService, postService];
+
   const comparisonData = [
     { metric: 'Oil Consumption', before: preService.consumption, after: postService.consumption, unit: 'L/1000km' },
     { metric: 'Efficiency', before: parseInt(preService.efficiency), after: parseInt(postService.efficiency), unit: 'km/L' },
@@ -38,7 +40,7 @@ const ServiceComparisonChart = () => {
       
       {/* Analysis Cards */}
       <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
-        {[preService, postService].map((period) => (
+        {data.map((period) => (
           <div key={period.period} style={{ 
             flex: 1, 
             padding: '20px', 
@@ -52,7 +54,7 @@ const ServiceComparisonChart = () => {
               <p>Total Oil Added: {period.oilAdded}L</p>
               <p>Daily Distance: {(period.distance/period.daysMonitored).toFixed(1)} km/day</p>
               <p>Oil Consumption: {period.consumption} L/1000km</p>
-              <p style={{ color: 'green' }}>Efficiency: {period.efficiency} km/L</p>
+              <p style={{ color: 'green', fontWeight: 'bold' }}>Efficiency: {period.efficiency} km/L</p>
             </div>
           </div>
         ))}
@@ -69,13 +71,13 @@ const ServiceComparisonChart = () => {
         <div style={{ display: 'flex', gap: '20px' }}>
           <div>
             <p>Consumption Improvement</p>
-            <p style={{ color: 'green', fontSize: '1.25rem' }}>
+            <p style={{ color: 'green', fontSize: '1.25rem', fontWeight: 'bold' }}>
               {((preService.consumption - postService.consumption)/preService.consumption * 100).toFixed(1)}%
             </p>
           </div>
           <div>
             <p>Efficiency Improvement</p>
-            <p style={{ color: 'green', fontSize: '1.25rem' }}>
+            <p style={{ color: 'green', fontSize: '1.25rem', fontWeight: 'bold' }}>
               {((postService.efficiency - preService.efficiency)/preService.efficiency * 100).toFixed(1)}%
             </p>
           </div>
@@ -94,7 +96,7 @@ const ServiceComparisonChart = () => {
             <XAxis type="number" />
             <YAxis type="category" dataKey="metric" width={100} />
             <Tooltip 
-              formatter={(value, name) => [
+              formatter={(value: number, name: string) => [
                 `${value.toFixed(1)} ${comparisonData.find(d => d.metric === name)?.unit || ''}`,
                 name
               ]}
@@ -104,6 +106,40 @@ const ServiceComparisonChart = () => {
             <Bar dataKey="after" name="Post-Service" fill="#4caf50" />
           </BarChart>
         </ResponsiveContainer>
+      </div>
+
+      {/* Impact Timeline */}
+      <div style={{ 
+        marginTop: '20px',
+        padding: '20px',
+        backgroundColor: '#f5f5f5',
+        borderRadius: '8px'
+      }}>
+        <h3 style={{ marginBottom: '1rem' }}>Service Impact Timeline</h3>
+        <div style={{ 
+          position: 'relative',
+          height: '64px',
+          backgroundColor: '#e0e0e0',
+          borderRadius: '32px',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '89.6%',
+            backgroundColor: '#4caf50',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            padding: '0 16px',
+            color: 'white',
+            fontWeight: 'bold'
+          }}>
+            89.6% Improved
+          </div>
+        </div>
       </div>
     </div>
   );
