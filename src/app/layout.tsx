@@ -1,11 +1,7 @@
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function Home() {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  )
+    <div>
+      <h1>Service Comparison</h1>
+    </div>
+  );
 }
