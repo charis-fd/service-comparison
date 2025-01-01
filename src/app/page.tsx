@@ -1,10 +1,7 @@
-import React from 'react';
-import ServiceComparisonChart from '../components/ServiceComparisonChart';
-
 export default function Home() {
   return (
-    <main>
-      <ServiceComparisonChart />
-    </main>
+    <div>
+      <h1>Service Comparison</h1>
+    </div>
   );
 }
