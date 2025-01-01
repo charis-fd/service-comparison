@@ -78,7 +78,7 @@ const ServiceComparisonChart: React.FC = () => {
           <div>
             <p>Efficiency Improvement</p>
             <p style={{ color: 'green', fontSize: '1.25rem', fontWeight: 'bold' }}>
-              {((postService.efficiency - preService.efficiency)/preService.efficiency * 100).toFixed(1)}%
+            {((Number(postService.efficiency) - Number(preService.efficiency))/Number(preService.efficiency) * 100).toFixed(1)}%
             </p>
           </div>
         </div>
