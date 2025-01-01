@@ -1,7 +1,16 @@
-export default function Home() {
+export const metadata = {
+  title: 'Service Comparison',
+  description: 'Service Comparison Dashboard',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <div>
-      <h1>Service Comparison</h1>
-    </div>
-  );
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
 }
